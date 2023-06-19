@@ -10,7 +10,14 @@ import java.util.Optional;
 //회원 서비스 로직 ( 비지니스 로직을 처리하도록 설계 )
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+//    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    /*Refactor - 회원 서비스 코드를 DI 가능하게 변경한다.*/
+    private final MemberRepository memberRepository;
+
+    // 외부에서 레포지토리를 넣어준다. (테스트에 있는 레포지토리와 동일한 레포지토리를 사용하기위함)
+        public MemberService(MemberRepository memberRepository) {
+            this.memberRepository = memberRepository;
+        }
 
 
      /* 회원가입 */
@@ -22,7 +29,7 @@ public class MemberService {
 //            throw new IllegalStateException("이미 존재하는 회원입니다.");
 //        });
         // Refactor (cmd + option + m)
-        validateDuplicateMember(member);
+        validateDuplicateMember(member); //중복 회원 검증
         memberRepository.save(member);
         return member.getId();
     }
