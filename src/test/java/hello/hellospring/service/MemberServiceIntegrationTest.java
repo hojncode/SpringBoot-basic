@@ -6,6 +6,7 @@ import hello.hellospring.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,11 +26,12 @@ class MemberServiceIntegrationTest {
     MemberRepository memberRepository;
 
     @Test
+//    @Commit // 실제 연결된 데이터베이스에 테스트 코드에서 작성된 데이터가 저장됨.
     public void 회원가입() throws Exception {
 
         // Given
         Member member = new Member();
-        member.setName("hello67");
+        member.setName("hello671");
 
         // When
         Long saveId = memberService.join(member);
